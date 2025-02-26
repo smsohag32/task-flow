@@ -2,7 +2,7 @@ import logoImage from "@/assets/logo/logo.png"
 const Logo = () => {
    return (
       <div className="flex items-center">
-         <img src={logoImage} alt="Task Flow" className="w-6" />    <p className="text-primary">TASK <span>FLOW</span></p>
+         <img src={logoImage} alt="Task Flow" className="w-8" />    <p className="font-semibold text-lg">TASK <span className="text-blue-600">FLOW</span></p>
       </div>
    );
 };

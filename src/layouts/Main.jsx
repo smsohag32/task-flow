@@ -1,10 +1,10 @@
-import MainLayout from "@/layouts/Dashboard";
+import { Outlet } from "react-router-dom";
 
 const Main = () => {
    return (
-      <>
-         <MainLayout />
-      </>
+      <div>
+         <Outlet />
+      </div>
    );
 };
 

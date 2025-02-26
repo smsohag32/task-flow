@@ -1,5 +1,6 @@
 import Dashboard from "@/layouts/Dashboard"
 import Main from "@/layouts/Main"
+import Landing from "@/pages/Auth/Landing/Landing"
 import Login from "@/pages/Auth/Login/Login"
 import Register from "@/pages/Auth/Register/Register"
 import Settings from "@/pages/Settings/Settings"
@@ -11,6 +12,10 @@ export const router = createBrowserRouter([
       path: "/",
       element: <Main />,
       children: [
+         {
+            path: "/",
+            element: <Landing />
+         },
          {
             path: "/auth/login",
             element: <Login />
