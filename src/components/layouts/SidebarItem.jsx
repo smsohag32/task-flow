@@ -31,7 +31,7 @@ const SidebarItem = ({ to, label, subItems, isOpen, onToggle, icon }) => {
          <div
             onClick={handleClick}
             className={`text-[16px] rounded-[4px] group whitespace-nowrap transition-all w-full font-medium py-[12px] ps-[20px] pe-[14px] cursor-pointer
-               ${isActive ? "bg-blue-50 text-primary shadow-sm" : "text-title hover:bg-blue-50 hover:text-title"}`}
+               ${isActive ? "bg-white text-primary shadow-sm" : "text-title hover:bg-white hover:text-title"}`}
          >
             <div className="w-full bg-transparent">
                <div className="flex items-center w-full bg-transparent gap-[16px] h-full">

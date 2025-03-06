@@ -1,10 +1,10 @@
 import Sidebar from "@/components/layouts/SideBar";
 import TopBar from "@/components/layouts/TopBar";
 import { useState } from "react";
-import { ScrollRestoration } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 import { Toaster } from "sonner";
 
-const Dashboard = ({ children }) => {
+const Dashboard = () => {
    const [toggle, setToggle] = useState(false)
 
    return (
@@ -19,7 +19,7 @@ const Dashboard = ({ children }) => {
                <TopBar toggle={toggle} setToggle={setToggle} />
             </div>
             <div className="px-4 py-4">
-               {children}
+               <Outlet />
             </div>
          </div>
          <Toaster position="top-right" />

@@ -7,11 +7,14 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "@/assets/logo/Logo";
+import { useRegisterUserMutation } from "@/redux-store/features/userApi";
+import { toast } from "sonner";
 
 const Register = () => {
    const navigate = useNavigate();
    const [showPassword, setShowPassword] = useState(false);
    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+   const [registerUser] = useRegisterUserMutation()
    const {
       register,
       handleSubmit,
@@ -19,9 +22,16 @@ const Register = () => {
       formState: { errors },
    } = useForm();
 
-   const onSubmit = (data) => {
+   const onSubmit = async (data) => {
       console.log(data);
-      navigate("/auth/login");
+      try {
+         const response = await registerUser(data).unwrap();
+         console.log("response", response);
+         toast.success("Register successfully.")
+         navigate("/auth/login");
+      } catch {
+         toast.error("Failed to register user.")
+      }
    };
 
    return (

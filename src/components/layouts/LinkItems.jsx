@@ -10,7 +10,6 @@ export const items = [
       to: "/dashboard/settings",
       label: "Settings",
       icon: <Settings className="h-5 w-5" />,
-
    },
 
 ];

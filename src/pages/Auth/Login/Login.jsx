@@ -9,23 +9,55 @@ import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { Link, useNavigate } from "react-router-dom"
 import Logo from "@/assets/logo/Logo"
+import { toast } from "sonner"
+import { useDispatch } from "react-redux"
+import { loginUser } from "@/redux-store/slices/authSlice"
 
 const Login = () => {
    const navigate = useNavigate()
    const [showPassword, setShowPassword] = useState(false)
+   const [loading, setLoading] = useState(false)
+   const dispatch = useDispatch()
    const {
       register,
       handleSubmit,
 
       formState: { errors },
-      isError
    } = useForm()
 
-   const onSubmit = (data) => {
-      console.log(data)
-      navigate("/dashboard")
+   const handleLogin = async (data) => {
+      const { email, password } = data;
+      setLoading(true);
+      try {
+         const resultAction = await dispatch(loginUser({ email, password })).unwrap();
+         console.log(resultAction)
+         if (resultAction) {
+            if (resultAction?.user) {
+               toast.success("Login successful");
+               navigate("/dashboard");
 
-   }
+            } else {
+               toast.success("Invalid credentials");
+               navigate("/auth/login");
+            }
+         } else {
+            console.log(resultAction)
+            toast.error(`${resultAction?.message}` || "Login Failed");
+         }
+      } catch (error) {
+         console.log(error);
+
+         if (error?.message) {
+            toast.error(error.message);
+         } else if (typeof error === "string") {
+            toast.error(error);
+         } else {
+            toast.error("Login failed due to server not responding.");
+         }
+      } finally {
+         setLoading(false);
+      }
+   };
 
    return (
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -34,7 +66,7 @@ const Login = () => {
                <Logo />
             </div>
             <h2 className="text-2xl font-bold text-gray-600 text-center mb-6">Welcome Back</h2>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <form onSubmit={handleSubmit(handleLogin)} className="space-y-4">
                <div className="space-y-2">
                   <Label htmlFor="email">Email</Label>
                   <div className="relative">
@@ -82,7 +114,7 @@ const Login = () => {
                   </div>
                   {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
                </div>
-               <Button type="submit" disabled={isError} className="w-full cursor-pointer">
+               <Button type="submit" disabled={loading} className="w-full cursor-pointer">
                   Sign In
                </Button>
             </form>

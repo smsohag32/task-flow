@@ -8,7 +8,7 @@ import { items } from "./LinkItems";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Logo from "@/assets/logo/Logo";
 
-export default function Sidebar({ toggle, setToggle }) {
+export default function Sidebar({ setToggle }) {
    const [openItems, setOpenItems] = useState({});
    const [isOpen, setIsOpen] = useState(false);
 
@@ -19,15 +19,9 @@ export default function Sidebar({ toggle, setToggle }) {
 
 
    const SidebarContent = () => (
-      <div className="flex  scroll-smooth flex-col h-full bg-white  border-e border-e-slate-200">
+      <div className="flex  scroll-smooth flex-col h-full bg-blue-50  border-e border-e-slate-200">
          <div className="flex items-center justify-between py-4 ps-8">
             <Logo className="w-32" />
-            <button
-               onClick={() => setToggle(!toggle)}
-               className="hidden cursor-pointer  hover:text-black text-gray-700 !px-4 !py-3 p-0 lg:block"
-            >
-               <ChevronsLeft className="h-6 w-6" />
-            </button>
          </div>
          <ScrollArea className="flex-1 px-4 pb-8 scroll-smooth ">
             <div className="!grid  !gap-2">

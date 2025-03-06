@@ -8,7 +8,7 @@ const Landing = () => {
    if (isLoading) {
       return <Loading />;
    }
-   if (user && user?.userType) {
+   if (user) {
       return <Navigate to="/dashboard"></Navigate>;
    }
    else {

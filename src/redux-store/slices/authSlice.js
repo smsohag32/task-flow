@@ -35,9 +35,6 @@ const authSlice = createSlice({
          deleteCookie("access_token");
          deleteCookie("user_data");
       },
-      updateUserState: (state, action) => {
-         state.user = action.payload;
-      },
    },
    extraReducers: (builder) => {
       builder
@@ -46,12 +43,12 @@ const authSlice = createSlice({
             state.error = null;
          })
          .addCase(loginUser.fulfilled, (state, action) => {
-            const { token, dto } = action.payload.data;
+            const { token, user } = action.payload;
             state.isLoading = false;
             state.token = token;
-            state.user = dto;
+            state.user = user;
             if (token) setCookie("access_token", token);
-            if (dto) setCookie("user_data", JSON.stringify(dto));
+            if (user) setCookie("user_data", JSON.stringify(user));
          })
          .addCase(loginUser.rejected, (state, action) => {
             state.isLoading = false;
@@ -60,5 +57,5 @@ const authSlice = createSlice({
    },
 });
 
-export const { logoutUser, updateUserState } = authSlice.actions;
+export const { logoutUser } = authSlice.actions;
 export default authSlice.reducer;

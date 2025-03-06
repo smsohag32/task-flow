@@ -1,4 +1,4 @@
-import { apiSlice } from "../slice/apiSlice";
+import { apiSlice } from "../slices/apiSlice";
 
 const userApi = apiSlice.injectEndpoints({
    endpoints: (builder) => ({
@@ -10,7 +10,15 @@ const userApi = apiSlice.injectEndpoints({
          }),
          invalidatesTags: ["user"],
       }),
+      registerUser: builder.mutation({
+         query: (data) => ({
+            url: `/register`,
+            method: "POST",
+            body: data,
+         }),
+         invalidatesTags: ["user"],
+      }),
    }),
 });
 
-export const { useChangePassMutation } = userApi;
+export const { useChangePassMutation, useRegisterUserMutation } = userApi;
